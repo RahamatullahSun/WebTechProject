@@ -4,7 +4,7 @@ if(isset($_COOKIE['status'])){
 
 $accNum = $_REQUEST['accNum'];
 
-$file = fopen('user.txt', 'r');
+$file = fopen('Files/user.txt', 'r');
 	
 	while (!feof($file)) {
 		$data = fgets($file);
@@ -41,7 +41,7 @@ $file = fopen('user.txt', 'r');
 		<form action="Edit.php" method="post">
 			<table border="1">
 					<tr>
-					<td colspan = "2">INFORMATION</td>
+					<th colspan = "2">INFORMATION</th>
 					</tr>
 				<tr>
 					<td>Name  </td>
@@ -117,7 +117,7 @@ $file = fopen('user.txt', 'r');
 
 			$user = $userName."|".$password."|".$accNum."|".$email."|".$phnNum."|".$nid."|".$DOB."|".$gender."|".$status."|".$bGroup."|".$religion."|".$address."\r\n";
 
-			$file = fopen('user.txt', 'w+');
+			$file = fopen('Files/user.txt', 'w+');
 			fwrite($file, $user);
 			header('location: Profile.php?accNum='.$accNum);
 

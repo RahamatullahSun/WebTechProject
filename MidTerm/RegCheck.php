@@ -13,7 +13,7 @@ $status = $_REQUEST['status'];
 $bGroup = $_REQUEST['bGroup'];
 $religion = $_REQUEST['religion'];
 $address = $_REQUEST['address'];
-$fname = $_REQUEST['fname'];
+// $fname = $_REQUEST['fname'];
 
 if($password == null || $userName == null){
 	echo "null password/name...";
@@ -22,7 +22,7 @@ if($password == null || $userName == null){
 }
 else{
 		$user = $userName."|".$password."|".$accNum."|".$email."|".$phnNum."|".$nid."|".$DOB."|".$gender."|".$status."|".$bGroup."|".$religion."|".$address."\r\n";
-		$file = fopen('user.txt', 'a');
+		$file = fopen('Files/user.txt', 'a');
 		fwrite($file, $user);
 		header('location: Login.html');					
     

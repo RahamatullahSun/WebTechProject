@@ -4,7 +4,7 @@ if(isset($_COOKIE['status'])){
 
 $accNum = $_REQUEST['accNum'];
 
-$file = fopen('user.txt', 'r');
+$file = fopen('Files/user.txt', 'r');
 	
 	while (!feof($file)) {
 		$data = fgets($file);
@@ -24,12 +24,12 @@ fclose($file);
 	<title>Home</title>
 </head>
 <body>
-	<a href="<?php echo $href = 'Profile.php?accNum='.$accNum; ?>"> Profile </a> <br/>
-	<a href="Balance.php"> Balance </a><br>
-	<a href="Deposit.php"> Deposit </a><br>
-	<a href="Withdraw.php"> Withdraw </a><br>
-	<a href="TransferMoney.html"> Transfer Money </a><br>
-	<a href="TransactionHistory.php"> Transaction History </a><br>
+	<a href="<?php echo 'Profile.php?accNum='.$accNum; ?>"> Profile </a> <br/>
+	<a href="<?php echo 'Balance.php?accNum='.$accNum; ?>"> Balance </a><br>
+	<a href="<?php echo 'Deposit.php?accNum='.$accNum; ?>"> Deposit </a><br>
+	<a href="<?php echo 'Withdraw.php?accNum='.$accNum; ?>"> Withdraw </a><br>
+	<a href="<?php echo 'TransferMoney.php?accNum='.$accNum; ?>"> Transfer Money </a><br>
+	<a href="<?php echo 'TransactionHistory.php?accNum='.$accNum; ?>"> Transaction History </a><br>
 	<!-- <a href="ChangePassword.php"> Change Password </a> <br> -->
 	<a href="logout.php"> logout </a>
 	

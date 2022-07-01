@@ -7,7 +7,7 @@ if($accNum == null || $password == null){
 	echo "null Account Number/Password...";
 }else{
 	
-	$file = fopen('user.txt', 'r');
+	$file = fopen('Files/user.txt', 'r');
 	
 	while (!feof($file)) {
 		$data = fgets($file);
