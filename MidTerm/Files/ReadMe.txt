@@ -1,0 +1,1 @@
+This folder is for storing all the files which will be created in the time of registration.
