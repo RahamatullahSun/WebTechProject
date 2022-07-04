@@ -1,0 +1,1 @@
+This folder is for storing the picture which will be uploaded in the time of registration.
