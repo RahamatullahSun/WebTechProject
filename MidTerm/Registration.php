@@ -3,7 +3,7 @@
     <title>Registration</title>
   </head>
   <body>
-    <form action="RegCheck.php" method="post">
+    <form action="RegCheck.php" method="post" enctype="multipart/form-data">
       <fieldset>
         <legend>REGISTRATION</legend>
 
@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td>NID:</td>
-                <td><input type="nid" name="nid" value="" /></td>
+                <td><input type="number" name="nid" value="" /></td>
             </tr>
             <tr>
               <td>Date of Birth:</td>
@@ -85,10 +85,10 @@
             <td>Address:</td>
             <td><textarea name="address"></textarea></td>
           </tr>
-          <!-- <tr>
+          <tr>
             <td>Picture:</td>
-            <td><input type="file" name="" /></td>
-          </tr> -->
+            <td><input type="file" name="picture" /></td>
+          </tr>
         </table>
       </fieldset>
 

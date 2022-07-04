@@ -1,10 +1,10 @@
 <?php
 
-if(isset($_COOKIE['status'])){
+require('Cookie.php');
 
 $accNum = $_REQUEST['accNum'];
 
-$file = fopen('user.txt', 'r');
+$file = fopen('Files/user.txt', 'r');
 	
 	while (!feof($file)) {
 		$data = fgets($file);
@@ -41,7 +41,7 @@ $file = fopen('user.txt', 'r');
 		<form action="Edit.php" method="post">
 			<table border="1">
 					<tr>
-					<td colspan = "2">INFORMATION</td>
+					<th colspan = "2">INFORMATION</th>
 					</tr>
 				<tr>
 					<td>Name  </td>
@@ -57,7 +57,7 @@ $file = fopen('user.txt', 'r');
 				</tr>
 				<tr>
 					<td>E-mail  </td>
-					<td><input type="text" name="email" value="<?php echo $email; ?>"></td>
+					<td><input type="email" name="email" value="<?php echo $email; ?>"></td>
 				</tr>
 				<tr>
 					<td>Phone No </td>
@@ -65,15 +65,16 @@ $file = fopen('user.txt', 'r');
 				</tr>
 				<tr>
 					<td>NID  </td>
-					<td><input type="text" name="nid" value="<?php echo $nid; ?>"></td>
+					<td><input type="number" name="nid" value="<?php echo $nid; ?>"></td>
 				</tr>
 				<tr>
 					<td>DOB  </td>
-					<td><input type="text" name="DOB" value="<?php echo $DOB; ?>"></td>
+					<td><input type="date" name="DOB" value="<?php echo $DOB; ?>"></td>
 				</tr>
 				<tr>
 					<td>Gender  </td>
-					<td><input type="text" name="gender" value="<?php echo $gender; ?>"></td>
+					<td><input type="text" name="gender" value="<?php echo $gender; ?>">
+					</td>
 				</tr>
 				<tr>
 					<td>Status  </td>
@@ -92,6 +93,7 @@ $file = fopen('user.txt', 'r');
 					<td><input type="text" name="address" value="<?php echo $address; ?>"></td>
 				</tr>
 			</table>
+
 				<p>Are you sure want to UPDATE your information?</p>
 				<input type="submit" name="submit" value="Update" >
 				<input type="submit" name="cancel" value="Cancel" >
@@ -117,7 +119,7 @@ $file = fopen('user.txt', 'r');
 
 			$user = $userName."|".$password."|".$accNum."|".$email."|".$phnNum."|".$nid."|".$DOB."|".$gender."|".$status."|".$bGroup."|".$religion."|".$address."\r\n";
 
-			$file = fopen('user.txt', 'w+');
+			$file = fopen('Files/user.txt', 'w+');
 			fwrite($file, $user);
 			header('location: Profile.php?accNum='.$accNum);
 
@@ -129,9 +131,3 @@ $file = fopen('user.txt', 'r');
 
 </body>
 </html>
-
-<?php 
-	}else{
-		echo "invalid request!";
-	} 
-?>

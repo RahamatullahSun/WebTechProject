@@ -1,10 +1,10 @@
 <?php
 
-if(isset($_COOKIE['status'])){
+require('Cookie.php');
 
 $accNum = $_REQUEST['accNum'];
 
-$file = fopen('user.txt', 'r');
+$file = fopen('Files/user.txt', 'r');
 	
 	while (!feof($file)) {
 		$data = fgets($file);
@@ -68,8 +68,11 @@ $file = fopen('user.txt', 'r');
 	   	// echo'</tr>';
 
 			echo '<tr>';
-			echo '<td colspan = "2">INFORMATION</td>';
+			echo '<th colspan = "2">INFORMATION</th>';
 			echo '</tr>';
+			echo'<tr>';
+			echo'<td > <img src ="./Files/Picture/'.$accNum.'.jpg" height = "100" width = "100"/></td>';
+			echo'</tr>';
 			echo'<tr>';
 			echo '<td>Name  </td>';
 			echo'<td>'.$userName.'</td>';
@@ -123,9 +126,3 @@ $file = fopen('user.txt', 'r');
 <a href="<?php echo $href = "Delete.php?accNum=$accNum & userName=$userName"?>">Delete Profile </a> <br/>
 </body>
 </html>
-
-<?php 
-	}else{
-		echo "invalid request!";
-	} 
-?>
