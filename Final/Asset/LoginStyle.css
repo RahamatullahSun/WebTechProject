@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+  background: #fec107;
+  padding: 0 10px;
+}
+.wrapper {
+  max-width: 350px;
+  width: 100%;
+  background: #fff;
+  margin: 130px auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+}
+
+.wrapper .title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fec107;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.wrapper .inputfield {
+  margin-bottom: 15px;
+  display: block;
+  align-items: center;
+}
+
+.wrapper .inputfield label {
+  display: inline-block;
+  width: 200px;
+  color: #757575;
+  margin-right: 10px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.wrapper .inputfield .input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #d5dbd9;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.wrapper .inputfield .input:focus {
+  border: 1px solid #fec107;
+}
+
+.wrapper .inputfield .btn {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 18px;
+  border: 0px;
+  background: #fec107;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  margin-top: 10px;
+}
+
+.wrapper .inputfield .btn:hover {
+  background: #ffd658;
+}
+
+.wrapper .inputfield:last-child {
+  margin-bottom: 0;
+}
+
+.wrapper .inputfield p {
+  font-size: 14px;
+  color: #757575;
+  text-align: center;
+  margin-top: 10px;
+}
+.wrapper .inputfield a {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 2px;
+  font-size: 19px;
+  font-weight: 500;
+  color: #fec107;
+  text-decoration: none;
+}
+.wrapper .inputfield a:hover {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0000ff;
+  text-decoration: underline;
+}
