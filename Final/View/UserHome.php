@@ -1,29 +1,56 @@
 <?php
 
-require('../Controller/Cookie.php');
-require_once('../model/CustomerModel.php');
-
 $accNum = $_REQUEST['accNum'];
 
+echo json_encode($accNum);
 
-            echo '<h1>Welcome '.$accNum.' !!</h1>';
-
-getAllUser();
 ?>
 
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-	<a href="<?php echo 'Profile.php?accNum='.$accNum; ?>"> Profile </a> <br/>
-	<a href="<?php echo 'Balance.php?accNum='.$accNum; ?>"> Balance </a><br>
-	<a href="<?php echo 'Deposit.php?accNum='.$accNum; ?>"> Deposit </a><br>
-	<a href="<?php echo 'Withdraw.php?accNum='.$accNum; ?>"> Withdraw </a><br>
-	<a href="<?php echo 'TransferMoney.php?accNum='.$accNum; ?>"> Transfer Money </a><br>
-	<a href="<?php echo 'TransactionHistory.php?accNum='.$accNum; ?>"> Transaction History </a><br>
-	<!-- <a href="ChangePassword.php"> Change Password </a> <br> -->
-	<a href="logout.php"> logout </a>
-	
-</body>
+  <head>
+    <title>Home</title>
+    <link rel="stylesheet" href="../Asset/userHomeStyle.css" />
+  </head>
+  <body>
+    <div class="welcome">
+      <div class="welcometext">Welcome MD. Rahamatullah</div>
+      <div class="logout"><a href="../Controller/Logout.php">logout</a></div>
+    </div>
+    <div class="inputfield">
+      <button
+        class="btn"
+        onclick="window.location.href = '../View/Withdraw.html?';"
+      >
+        Profile
+      </button>
+      <!-- <button class="btn" onclick="window.location.href='../View/Balance.html?accNum=<?php echo $accNum?>';">Balance</button> -->
+      <button class="btn" onclick="balance()">Balance</button>
+      <button
+        class="btn"
+        onclick="window.location.href = '../View/Deposit.html?';"
+      >
+        Deposit
+      </button>
+      <button
+        class="btn"
+        onclick="window.location.href = '../View/Withdraw.html?';"
+      >
+        Withdraw
+      </button>
+      <button
+        class="btn"
+        onclick="window.location.href = '../View/TransferMoney.html?';"
+      >
+        Transfer Money
+      </button>
+      <button
+        class="btn"
+        onclick="window.location.href = '../View/TransactionHistory.html?';"
+      >
+        Transaction History
+      </button>
+    </div>
+  </body>
+ <script src="../Asset/BalanceCheck.js"></script>
 </html>

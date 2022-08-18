@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+  background: #fff;
+  padding: 0 10px;
+}
+.welcome {
+  width: 100%;
+  background: #fec107;
+  margin-top: 30px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-bottom: 0px;
+}
+
+.welcome .welcometext {
+  font-size: 30px;
+  font-weight: 700;
+  margin: auto;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.welcome .logout {
+  width: 9%;
+  position: relative;
+  bottom: 37px;
+  right: 660px;
+  margin: auto;
+}
+
+.welcome .logout a {
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.welcome .logout a:hover {
+  font-size: 32px;
+  font-weight: 900;
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+.inputfield {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  margin-top: 10px;
+  box-shadow: 4px 4px 8px rgba(14, 9, 9, 0.125);
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border: 6px solid #fec107;
+  text-align: center;
+}
+
+.inputfield .btn {
+  width: 15%;
+  padding: 12px 10px;
+  font-size: 18px;
+  border: 0px;
+  background: #fec107;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  margin-top: 10px;
+}
+.inputfield .btn:hover {
+  background: #ffd658;
+}

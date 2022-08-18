@@ -1,7 +1,8 @@
-const form = document.getElementById('f');
+// const form = document.getElementById('f');
 const userName = document.getElementById('userName');
 const password = document.getElementById('password');
 const cPassword = document.getElementById('cpassword');
+const accNum = document.getElementById('accNum');
 const email = document.getElementById('email');
 const phnNo = document.getElementById('phnNo');
 const nid = document.getElementById('nid');
@@ -13,31 +14,73 @@ const religion = document.getElementById('religion');
 const address = document.getElementById('address');
 const message = 'Field Cannot be empty';
 
-const selectGender = document.getElementById('selectGender');
+function ajax() {
+  if (
+    checkName() == true &&
+    checkPassword() == true &&
+    checkEmail() == true &&
+    checkPhnNo() == true &&
+    checkNid() == true &&
+    checkDob() == true &&
+    checkGender() == true &&
+    checkStatus() == true &&
+    checkbGroup() == true &&
+    checkReligion() == true &&
+    checkAddress() == true
+  ) {
+    const userNameValue = userName.value;
+    const passwordValue = password.value;
+    const accNumValue = accNum.value;
+    const emailValue = email.value;
+    const phnNoValue = phnNo.value;
+    const nidValue = nid.value;
+    const dobValue = dob.value;
+    const genderValue = gender.value;
+    const mstatusValue = mstatus.value;
+    const bGroupValue = bGroup.value;
+    const religionValue = religion.value;
+    const addressValue = address.value;
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  checkName();
-  checkPassword();
-  confirmPassword();
-  checkNid();
-  checkAddress();
-  checkPhnNo();
-  checkEmail();
-  checkGender();
-  checkDob();
-  checkReligion();
-  checkStatus();
-  checkbGroup();
-});
+    const user = {
+      userName: userNameValue,
+      password: passwordValue,
+      accNum: accNumValue,
+      email: emailValue,
+      phnNo: phnNoValue,
+      nid: nidValue,
+      dob: dobValue,
+      gender: genderValue,
+      mStatus: mstatusValue,
+      bGroup: bGroupValue,
+      religion: religionValue,
+      address: addressValue,
+    };
+
+    const json = JSON.stringify(user);
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../controller/RegCheck.php', true);
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        window.location.href = '../View/Login.html';
+      }
+    };
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send('data=' + json);
+  } else {
+    alert('Invalid Credintials');
+  }
+}
 
 function checkName() {
   const userNameValue = userName.value.trim();
 
   if (userNameValue == '') {
     setError(userName, message);
+    return false;
   } else {
     setSuccess(userName);
+    return true;
   }
 }
 
@@ -52,6 +95,7 @@ function checkPassword() {
     );
   } else {
     setSuccess(password);
+    return true;
   }
 }
 
@@ -64,6 +108,7 @@ function confirmPassword() {
     setError(cPassword, 'Password does not match!!');
   } else {
     setSuccess(cPassword);
+    return true;
   }
 }
 
@@ -73,6 +118,7 @@ function checkPhnNo() {
     setError(phnNo, message);
   } else {
     setSuccess(phnNo);
+    return true;
   }
 }
 function checkNid() {
@@ -81,6 +127,7 @@ function checkNid() {
     setError(nid, message);
   } else {
     setSuccess(nid);
+    return true;
   }
 }
 function checkAddress() {
@@ -89,6 +136,7 @@ function checkAddress() {
     setError(address, message);
   } else {
     setSuccess(address);
+    return true;
   }
 }
 
@@ -101,6 +149,7 @@ function checkEmail() {
     setError(email, 'Not a valid email');
   } else {
     setSuccess(email);
+    return true;
   }
 }
 
@@ -111,6 +160,7 @@ function checkGender() {
     setError(gender, 'Please Select an Option');
   } else {
     setSuccess(gender);
+    return true;
   }
 }
 function checkDob() {
@@ -120,6 +170,7 @@ function checkDob() {
     setError(dob, 'Please Select an Option');
   } else {
     setSuccess(dob);
+    return true;
   }
 }
 function checkbGroup() {
@@ -129,6 +180,7 @@ function checkbGroup() {
     setError(bGroup, 'Please Select an Option');
   } else {
     setSuccess(bGroup);
+    return true;
   }
 }
 function checkReligion() {
@@ -138,6 +190,7 @@ function checkReligion() {
     setError(religion, 'Please Select an Option');
   } else {
     setSuccess(religion);
+    return true;
   }
 }
 function checkStatus() {
@@ -147,6 +200,7 @@ function checkStatus() {
     setError(mstatus, 'Please Select an Option');
   } else {
     setSuccess(mstatus);
+    return true;
   }
 }
 
@@ -155,11 +209,13 @@ function setError(input, message) {
   const small = form.querySelector('small');
   small.innerText = message;
   form.className = 'inputfield error';
+  return false;
 }
 
 function setSuccess(input) {
   const form = input.parentElement;
   form.className = 'inputfield success';
+  return true;
 }
 
 function isEmail(email) {

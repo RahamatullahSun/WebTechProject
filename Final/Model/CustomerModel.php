@@ -41,3 +41,10 @@ function getAllUser(){
     }
 
 }
+
+function getBalance($accNum){
+    $conn = getconnection();
+    $sql = "select balance from Customer where AccNum like $accNum;";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}

@@ -1,24 +1,25 @@
 <?php 
+    
+    require_once('../model/CustomerModel.php');
 
-require_once('../model/CustomerModel.php');
+    $json = $_POST['data'];
 
-$userName = $_REQUEST['name'];
-$password = $_REQUEST['password'];
-$cPassword = $_REQUEST['cPassword'];
-$accNum = $_REQUEST['accNum'];
-$email = $_REQUEST['email'];
-$phnNum = $_REQUEST['phnNum'];
-$nid = $_REQUEST['nid'];
-$DOB = $_REQUEST['DOB'];
-$gender = $_REQUEST['gender'];
-$status = $_REQUEST['status'];
-$bGroup = $_REQUEST['bGroup'];
-$religion = $_REQUEST['religion'];
-$address = $_REQUEST['address'];
-$fileName = $_FILES['picture']['name'];
+    $user = json_decode($json);
 
-insert(['name'=>$userName,'password'=>$password,'accNum'=>$accNum,'email'=>$email,'phnNo'=>$phnNum,'nid'=>$nid,'DOB'=>$DOB,'gender'=>$gender,'status'=>$status,'bGroup'=>$bGroup,'religion'=>$religion,'address'=>$address,'balance'=>500]);
+    $userName = $user->userName;
+    $password = $user->password;
+    $accNum = $user->accNum;
+    $email = $user->email;
+    $phnNum = $user->phnNo;
+    $nid = $user->nid;
+    $DOB = $user->dob;
+    $gender = $user->gender;
+    $status = $user->mStatus;
+    $bGroup = $user->bGroup;
+    $religion =$user->religion;
+    $address = $user->address;
 
-header('location: ../View/Login.html');
 
+    insert(['name'=>$userName,'password'=>$password,'accNum'=>$accNum,'email'=>$email,'phnNo'=>$phnNum,'nid'=>$nid,'DOB'=>$DOB,'gender'=>$gender,'status'=>$status,'bGroup'=>$bGroup,'religion'=>$religion,'address'=>$address,'balance'=>500]);
+    
 ?>

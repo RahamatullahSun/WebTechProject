@@ -2,11 +2,10 @@
   <head>
     <title>Registration</title>
     <link rel="stylesheet" href="../Asset/RegFormStyle.css?">
-    
     <!-- <script src="https://kit.fontawesome.com/e2b664239b.js" crossorigin="anonymous"></script> -->
   </head>
   <body>
-    <form  enctype="multipart/form-data"  id="f">
+    <!-- <form  enctype="multipart/form-data"  id="f"> -->
 
         <div class="wrapper">
         <div class="title">
@@ -78,14 +77,14 @@
               <label>Blood Group</label>
                 <select name="bGroup" id="bGroup" onclick="checkbGroup()" required>
                   <option value="">Select</option>
-                  <option value="A+">A+ (A positive)</option>
-                  <option value="A−">A− (A negative)</option>
-                  <option value="B+">B+ (B positive)</option>
-                  <option value="B−">B− (B negative)</option>
-                  <option value="AB+">AB+ (AB positive)</option>
-                  <option value="AB−">AB− (AB negative)</option>
-                  <option value="O+">O+ (O positive)</option>
-                  <option value="O−">O− (O negative)</option>
+                  <option value="Apos">A+ (A positive)</option>
+                  <option value="Aneg">A− (A negative)</option>
+                  <option value="Bpos">B+ (B positive)</option>
+                  <option value="Bneg">B− (B negative)</option>
+                  <option value="ABpos">AB+ (AB positive)</option>
+                  <option value="ABneg">AB− (AB negative)</option>
+                  <option value="Opos">O+ (O positive)</option>
+                  <option value="Oneg">O− (O negative)</option>
                 </select>
               <small>Error Message</small>
             </div> 
@@ -107,12 +106,12 @@
               <small>Error Message</small>
           </div> 
           <div class="inputfield">
-            <button class="btn">Register</button>
+            <input class="btn" type="button" name="" value="Register" onclick="ajax()"/>
           </div>
         </div>
       </div>
 
-    </form>
+    <!-- </form> -->
   </body>
   <script src = "../Asset/RegValidation.js"></script>
 </html>
