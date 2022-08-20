@@ -1,62 +1,67 @@
 <?php
 
-    require('Cookie.php');
-    $accNum = $_REQUEST['accNum'];
+  require_once('../Model/CustomerModel.php');
+
+  $accNum = $_REQUEST['accNum'];
+  $balance = getBalance($accNum);
 
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Deposit</title>
-        <legend><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">Go Home</a> <br> <br> </legend>   
-    </head>
-    <body>
-        <form action="Deposit.php" method ="post">
-            <fieldset>
-                <legend>Deposit</legend>
-                    <input type="hidden" name="accNum" value=<?php echo $accNum?>>
-                    <p>Please enter the amount you want to deposit </p>
-                    Amount: <input type="number" name="depositAmount" value="">
-                    <input type="submit" name="confirm" value="Confirm">
-                    <input type="submit" name="cancel" value="Cancel">
-                    </br>
-                    </br>
-            </fieldset>
-        </form>
-            <?php
+  <head>
+    <title>Deposit</title>
+    <link rel="stylesheet" href="../Asset/DepositStyle.css" />
+  </head>
+  <body>
+    <form action='../View/Deposit.php?accNum=<?php echo $accNum?>' method="POST">
+    <div class="welcome">
+      <div class="welcometext">Welcome MD. Rahamatullah</div>
+      <div class="goback"><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">GoBack</a></div>
+    </div>
+    <div class="deposit">
+      <div class="text">
+        Enter Amount You Want to Deposit :
+        <input
+          type="number"
+          name="deposit"
+          id="deposit"
+          class="input"
+          value=""
+          placeholder="Deposit amount"
+          
+        />
+        <input type="submit" class="btn" name="confirm" value="Confirm"></input>
+        <button type="submit" class="btn" name="cancel">Cancel</button>
+      </div>
+    </div>
+    </form>
+    <?php
 
-                if(isset($_POST['confirm'])){
-                    
-                    $directory = 'Files/balance.txt';
+      if(isset($_REQUEST['confirm'])){
+    
+        $deposit = $_REQUEST['deposit'];
 
-                    $file = fopen($directory, 'a+');
-                    $balance = fgets($file);
-                    $deposit = $_POST['depositAmount'];
+        if($deposit>=500){
 
-                    if($deposit>=500){
+        $newBalance = $balance + $deposit;
 
-                    $newBalance = $balance + $deposit;
-                    fclose($file);
+        updateBalance($newBalance, $accNum);
 
-                    $file = fopen($directory, 'w');
-	                fwrite($file, $newBalance);
-                    fclose($file);
-                    
-                    $hData ="TK ".$deposit." deposited to account number : ".$accNum.".\r\n";
-                    $hFile = fopen('Files/History.txt','a');
-                    fwrite($hFile, $hData);
-                    header('location: UserHome.php?accNum='.$accNum);
+        echo '<h2 id = "successMsg">TK '.$deposit.' Deposited Successfully </h2>';
+        $text = "Tk " . $deposit . " Deposited to Account " . $accNum;
 
-                    }else{
-                        echo '<h2>Minimum Deposit amount is TK 500!!</h2>';
-                    }
+        setHistory($text, $accNum);
+
+      }else{
+        echo '<h2 id = "errorMsg">Minimum Deposit amount is TK 500!!</h2>';
+      }
 
 
-                }elseif(isset($_POST['cancel'])){
+  }elseif(isset($_REQUEST['cancel'])){
 
-                    header('location: UserHome.php?accNum='.$accNum);
-                }
+      header('location: UserHome.php?accNum='.$accNum);
+  }
 
-            ?>
-    </body>
+    ?>
+  </body>
 </html>

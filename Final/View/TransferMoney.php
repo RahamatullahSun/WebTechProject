@@ -1,65 +1,90 @@
 <?php
-  require('Cookie.php');
-  $accNum = $_REQUEST['accNum'];
+require_once('../Model/CustomerModel.php');
+
+$accNum = $_REQUEST['accNum'];
+$balance = getBalance($accNum);
 ?>
 
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Transfer</title>
-    <legend><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">Go Home</a> <br> <br> </legend>
+    <title>Transfer Money</title>
+    <link rel="stylesheet" href="../Asset/TransferMoneyStyle.css" />
   </head>
-  <body> 
-    <form action="TransferMoney.php" method="POST">
-      <fieldset>
-        <legend>Transfer</legend>
-
-        <table>
-          <tr>
-            <td>Account Name : <input type="text" name="accName" value="" /></td>
-            <td>Account Number : <input type="number" name="tAccNum" value="" /></td>
-            <td>Amount : <input type="number" name="amount" value="" /></td>
-            <td><input type="submit" name="send" value="Send" /></td>
-            <td><input type="submit" name="cancel" value="Cancel"></td>
-            <input type="hidden" name="accNum" value="<?php echo $accNum;?>">
-          </tr>
-        </table>
-
-      </fieldset>
+  <body>
+    <form action='../View/TransferMoney.php?accNum=<?php echo $accNum?>' method="POST">
+    <div class="welcome">
+      <div class="welcometext">Welcome MD. Rahamatullah</div>
+      <div class="goback"><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">GoBack</a></div>
+    </div>
+    <div class="deposit">
+      <div class="text">
+        TO :
+        <input
+          type="number"
+          name="tAccNum"
+          id="tAccNum"
+          class="input"
+          value=""
+          placeholder="Account Number"
+          required
+        />
+        :
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="input"
+          value=""
+          placeholder="Account Name"
+          required
+        />
+        :
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          class="input"
+          value=""
+          placeholder="Transfer Amount"
+          required
+        />
+        <input type="submit" class="btn" name="send" value="Send"></input>
+        <button type="submit" class="btn" name="cancel">Cancel</button>
+      </div>
+    </div>
     </form>
       <?php
-          if(isset($_REQUEST['send'])){
 
-            $accName = $_REQUEST['accName'];
-            $tAccNum = $_REQUEST['tAccNum'];
-            $amount = $_REQUEST['amount'];
+      if(isset($_REQUEST['send'])){
+    
+        $send = $_REQUEST['amount'];
+        $tAccNum = $_REQUEST['tAccNum'];
+        $name = $_REQUEST['name'];
 
-            $file = fopen('Files/balance.txt', 'a+');
-            $balance = fgets($file);
+        if($send>$balance){
+          echo '<h2 id = "errorMsg">Insufficient Balance !!! Try again !!</h2>';
+        }elseif($send>=500){
 
-            if($amount>$balance){
+        $newBalance = $balance - $send;
 
-              echo '<h2>Insufficient Balance !!! Try again !!</h2>';
+        updateBalance($newBalance, $accNum);
 
-            }else{
+        echo '<h2 id = "successMsg">TK '.$send.' Transferd Successfully to Account : '.$tAccNum.' Named : '.$name.' </h2>';
+          
+        $text = "Tk " . $send . " transferd to Account " . $tAccNum . " Named : ".$name;
 
-            $newBalance = $balance - $amount;
-            fclose($file);
+        setHistory($text, $accNum);
+        
+        }else{
+          echo '<h2 id = "errorMsg">Minimum Transfer amount is TK 500!!</h2>';
+        }
 
-            $file = fopen('Files/balance.txt', 'w');
-	          fwrite($file, $newBalance);
-            fclose($file);
+      }elseif(isset($_REQUEST['cancel'])){
 
-            $data = "Tk " . $amount . " transferd to account named " . $accName . " and account number : ".$tAccNum.".\r\n";
+        header('location: UserHome.php?accNum='.$accNum);
+      }
 
-            $file = fopen('Files/History.txt', "a");
-            fwrite($file, $data);
-            header('location: UserHome.php?accNum='.$accNum);
-
-            }
-
-          }elseif(isset($_REQUEST['cancel'])){
-            header('location: UserHome.php?accNum=' . $accNum);
-          }
-      ?>
+  ?>
   </body>
 </html>

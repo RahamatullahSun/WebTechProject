@@ -2,8 +2,6 @@
 
 $accNum = $_REQUEST['accNum'];
 
-echo json_encode($accNum);
-
 ?>
 
 <!DOCTYPE html>
@@ -24,32 +22,11 @@ echo json_encode($accNum);
       >
         Profile
       </button>
-      <!-- <button class="btn" onclick="window.location.href='../View/Balance.html?accNum=<?php echo $accNum?>';">Balance</button> -->
-      <button class="btn" onclick="balance()">Balance</button>
-      <button
-        class="btn"
-        onclick="window.location.href = '../View/Deposit.html?';"
-      >
-        Deposit
-      </button>
-      <button
-        class="btn"
-        onclick="window.location.href = '../View/Withdraw.html?';"
-      >
-        Withdraw
-      </button>
-      <button
-        class="btn"
-        onclick="window.location.href = '../View/TransferMoney.html?';"
-      >
-        Transfer Money
-      </button>
-      <button
-        class="btn"
-        onclick="window.location.href = '../View/TransactionHistory.html?';"
-      >
-        Transaction History
-      </button>
+      <button class="btn" onclick="window.location.href='../View/Balance.php?accNum=<?php echo $accNum?>';">Balance</button>
+      <button class="btn" onclick="window.location.href='../View/Deposit.php?accNum=<?php echo $accNum?>';">Deposit</button>
+      <button class="btn" onclick="window.location.href='../View/Withdraw.php?accNum=<?php echo $accNum?>';">Withdraw</button>
+      <button class="btn" onclick="window.location.href='../View/TransferMoney.php?accNum=<?php echo $accNum?>';">Transfer Money</button>
+      <button class="btn" onclick="window.location.href='../View/TransactionHistory.php?accNum=<?php echo $accNum?>';">Transaction History</button>
     </div>
   </body>
  <script src="../Asset/BalanceCheck.js"></script>

@@ -1,64 +1,67 @@
 <?php
 
-    require('Cookie.php');
-    $accNum = $_REQUEST['accNum'];
+  require_once('../Model/CustomerModel.php');
+
+  $accNum = $_REQUEST['accNum'];
+  $balance = getBalance($accNum);
 
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Withdraw</title>
-        <legend><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">Go Home</a> <br> <br> </legend>
-    </head>
-    <body>
-        <form action="Withdraw.php" method ="post">
-            <fieldset>
-                <legend>Withdraw</legend>
-                    <input type="hidden" name="accNum" value=<?php echo $accNum?>>
-                    <p>Please enter the amount you want to withdraw </p>
-                    Amount: <input type="number" name="withdrawAmount" value="">
-                    <input type="submit" name="confirm" value="Confirm">
-                    <input type="submit" name="cancel" value="Cancel">
-                    </br>
-                    </br>
-            </fieldset>
-        </form>
-            <?php
+  <head>
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="../Asset/DepositStyle.css" />
+  </head>
+  <body>
+    <form action='../View/Withdraw.php?accNum=<?php echo $accNum?>' method="POST">
+      <div class="welcome">
+        <div class="welcometext">Welcome MD. Rahamatullah</div>
+        <div class="goback"><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">GoBack</a></div>
+      </div>
+      <div class="deposit">
+        <div class="text">
+          Enter Amount You Want to Withdraw :
+          <input
+            type="number"
+            name="withdraw"
+            id="withdraw"
+            class="input"
+            value=""
+            placeholder="Withdraw amount"
+          />
+          <input type="submit" class="btn" name="confirm" value="Confirm"></input>
+          <button type="submit" class="btn" name="cancel">Cancel</button>
+        </div>
+      </div>
+    </form>
+  <?php
 
-                if(isset($_POST['confirm'])){
-                    
-                    $directory = 'Files/balance.txt';
+      if(isset($_REQUEST['confirm'])){
+    
+        $withdraw = $_REQUEST['withdraw'];
 
-                    $file = fopen($directory, 'a+');
-                    $balance = fgets($file);
-                    $withdraw =$_POST['withdrawAmount'];
+        if($withdraw>$balance){
+          echo '<h2 id = "errorMsg">Insufficient Balance !!! Try again !!</h2>';
+        }elseif($withdraw>=500){
 
-                    if($withdraw>$balance){
+        $newBalance = $balance - $withdraw;
 
-                        echo '<h2>Insufficient Balance !!! Try again !!</h2>';
+        updateBalance($newBalance, $accNum);
 
-                    }else{
+        echo '<h2 id = "successMsg">TK '.$withdraw.' Withdrawn Successfully </h2>';
+        $text = "Tk " . $withdraw . " Withdrawn from Account " . $accNum;
 
-                    $newBalance = $balance - $withdraw;
-                    fclose($file);
+        setHistory($text, $accNum);
+        
+        }else{
+          echo '<h2 id = "errorMsg">Minimum Withdraw amount is TK 500!!</h2>';
+        }
 
-                    $file = fopen($directory, 'w');
-	                fwrite($file, $newBalance);
-                    fclose($file);
+      }elseif(isset($_REQUEST['cancel'])){
 
-                    $hData ="TK ".$withdraw." has been withdrawn from account number : ".$accNum.".\r\n";
-                    $hFile = fopen('Files/History.txt','a');
-                    fwrite($hFile, $hData);
+        header('location: UserHome.php?accNum='.$accNum);
+      }
 
-                    header('location: UserHome.php?accNum='.$accNum);
-
-                    }
-
-                }elseif(isset($_POST['cancel'])){
-
-                    header('location: UserHome.php?accNum='.$accNum);
-                }
-
-            ?>
-    </body>
+  ?>
+  </body>
 </html>

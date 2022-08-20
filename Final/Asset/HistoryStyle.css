@@ -29,28 +29,17 @@ body {
   text-transform: uppercase;
   text-align: center;
 }
-
-.deposit {
+.border {
   position: relative;
   width: 100%;
   background: #fff;
   margin-top: 10px;
   box-shadow: 4px 4px 8px rgba(14, 9, 9, 0.125);
-  padding-left: 20px;
+  /* padding-left: 20px; */
   padding-top: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+  /* padding-right: 20px; */
+  padding-bottom: 0px;
   border: 6px solid #fec107;
-}
-
-.deposit .text {
-  font-size: 25px;
-  font-weight: 500;
-  margin: auto;
-  color: #fec107;
-  /* padding-left: 100px; */
-  /* padding: auto; */
-  text-align: center;
 }
 .welcome .goback {
   width: 9%;
@@ -75,50 +64,37 @@ body {
   text-decoration: underline;
 }
 
-.deposit .input {
-  /* position: relative; */
-  /* left: 470px;
-  bottom: 34px; */
-  width: 20%;
-  outline: none;
-  border: 2px solid #ffd658;
-  font-size: 15px;
-  padding: 8px 10px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-.deposit .input:focus,
-.deposit .input:hover {
+.border .infoTable table,
+td {
   border: 3px solid #fec107;
+  /* border-collapse: collapse; */
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+  margin: auto;
+  padding-top: 0px;
+  padding-bottom: 4px;
 }
-
-.deposit .btn {
-  width: 10%;
-  padding: 8px 10px;
-  font-size: 18px;
-  border: 0px;
-  background: #fec107;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 3px;
-  outline: none;
+.border .infoTable tr {
+  height: 50px;
+}
+.border .infoTable tr:nth-child(odd) {
+  /* background-color: #fec107; */
+  background-color: #78e3eb;
+  color: white;
+}
+.border .infoTable {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
+  margin-bottom: 10px;
+  border-spacing: 5px;
+  border-collapse: collapse;
 }
 
-.deposit .btn:hover {
-  background: #ffd658;
-}
-
-#errorMsg {
-  color: red;
+.border h1 {
+  color: #fec107;
   text-align: center;
-  border: 2px;
-  padding: 15px;
-}
-#successMsg {
-  color: #2ecc71;
-  text-align: center;
-  border: 2px;
-  padding: 15px;
+  margin-bottom: 50px;
 }

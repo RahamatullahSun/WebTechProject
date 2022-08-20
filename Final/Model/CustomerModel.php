@@ -46,5 +46,26 @@ function getBalance($accNum){
     $conn = getconnection();
     $sql = "select balance from Customer where AccNum like $accNum;";
     $result = mysqli_query($conn, $sql);
-    return $result;
+    $data = mysqli_fetch_assoc($result);
+    $balance = $data['balance'];
+    return $balance;
+}
+
+function updateBalance($amount,$accNum){
+    $conn = getconnection();
+    $sql = "UPDATE `customer` SET `Balance` = '$amount' WHERE `customer`.`AccNum` = $accNum;";
+    mysqli_query($conn, $sql);
+}
+
+function setHistory($text,$accNum){
+    $conn = getconnection();
+    $sql = "INSERT INTO `history`(`text`, `accNum`) VALUES ('$text','$accNum');";
+    mysqli_query($conn, $sql);
+}
+
+function getHistory(){
+    $conn = getconnection();
+    $sql = "SELECT text FROM History";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
