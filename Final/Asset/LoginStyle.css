@@ -105,3 +105,9 @@ body {
   color: #0000ff;
   text-decoration: underline;
 }
+.wrapper .inputfield small {
+  color: #e74c3c;
+  visibility: visible;
+  text-align: center;
+  margin-left: 10px;
+}

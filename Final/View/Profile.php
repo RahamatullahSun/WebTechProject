@@ -1,128 +1,125 @@
 <?php
-
-require('Cookie.php');
+require_once('../Model/CustomerModel.php');
 
 $accNum = $_REQUEST['accNum'];
 
-$file = fopen('Files/user.txt', 'r');
-	
-	while (!feof($file)) {
-		$data = fgets($file);
-		$user = explode("|", $data); 
-		if($accNum == trim($user[2])) {
-			$userName = trim($user[0]);
-			$accNum = trim($user[2]);
-			$email = trim($user[3]);
-			$phnNum = trim($user[4]);
-			$nid = trim($user[5]);
-			$DOB = trim($user[6]);
-			$gender = trim($user[7]);
-			$status = trim($user[8]);
-			$bGroup = trim($user[9]);
-			$religion = trim($user[10]);
-			$address = trim($user[11]);
-			break;
-		}	
-	}
-
 ?>
-
-<!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="../Asset/ProfileStyle.css" />
+  </head>
+  <body>
+    <div class="welcome">
+      <div class="welcometext">Welcome MD. Rahamatullah</div>
+      <div class="goback"><a href="<?php echo 'UserHome.php?accNum=' . $accNum; ?>">GoBack</a></div>
+    </div>
+	<div class="leftPanel">
+      <div class= "img">
+      <?php  echo'<img class="im" src ="../Asset/image/'.$accNum.'.jpg"/>';?>
+      </div>
+      <div class="name"><?php echo getUser($accNum)['Name']; ?></div>
+      <input class="btn" type="button" name="" value="Edit Profile"/>
+      <input class="btn" type="button" name="" value="Delete Profile"/>
+	</div>
+	<div class="rightPanel">
+    <table class="infoTable">
+        <tr>
+          <td>Name:</td>
+          <td><?php echo getUser($accNum)['Name']; ?></td>
+        </tr>
+        <tr>
+          <td>Account Number</td>
+          <td><?php echo getUser($accNum)['AccNum']; ?></td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><?php echo getUser($accNum)['Email']; ?></td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td><?php echo getUser($accNum)['PhnNo']; ?></td>
+        </tr>
+        <tr>
+          <td>NID</td>
+          <td><?php echo getUser($accNum)['NID']; ?></td>
+        </tr>
+        <tr>
+          <td>Date of Birth</td>
+          <td><?php echo getUser($accNum)['DOB']; ?></td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td><?php echo getUser($accNum)['Gender']; ?></td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td><?php echo getUser($accNum)['Status']; ?></td>
+        </tr>
+        <tr>
+          <td>Blood Group</td>
+          <td><?php echo getUser($accNum)['BloodGroup']; ?></td>
+        </tr>
+        <tr>
+          <td>Religion</td>
+          <td><?php echo getUser($accNum)['Religion']; ?></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td><?php echo getUser($accNum)['Address']; ?></td>
+        </tr>
+    </table>
+  </div>
+      <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <h1>Edit Your Profile</h1>
 
-	<title>Profile</title>
-	
-</head>
-<body>
-		<?php echo '<h2>Profile of ' . $userName . '!!</h2>'; ?>
-		<br>
-		<table border="1">
-			<!-- <tr>
-				<td>Name</td>
-				<td>Account No</td>
-				<td>E-mail</td>
-				<td>Phone No</td>
-				<td>NID</td>
-				<td>DOB</td>
-				<td>Gender</td>
-				<td>Status</td>
-				<td>Blood Group</td>
-				<td>Religion</td>
-				<td>Address</td>
-			</tr> -->
-<?php
-	
-    	// echo'<tr>';
-        // echo'<td>'.$userName.'</td>';
-        // echo'<td>'.$accNum.'</td>';
-        // echo'<td>'.$email.'</td>';
-        // echo'<td>'.$phnNum.'</td>';
-        // echo'<td>'.$nid.'</td>';
-        // echo'<td>'.$DOB.'</td>';
-        // echo'<td>'.$gender.'</td>';
-        // echo'<td>'.$status.'</td>';
-        // echo'<td>'.$bGroup.'</td>';
-        // echo'<td>'.$religion.'</td>';
-        // echo'<td>'.$address.'</td>';
-	   	// echo'</tr>';
+        <div class="wrapper">
+        <div class="form">
+          <div class="inputfield">
+              <input type="text" value="<?php echo getUser($accNum)['Name']; ?>" class="input" id="userName" >
+          </div>  
+          <div class="inputfield">
+              <input type="text" value="<?php echo getUser($accNum)['Password']; ?>"  class="input" id="password" >         
+          </div>  
+          <div class="inputfield">
+              <input type="number" class="input" id="accNum" value="<?php echo getUser($accNum)['AccNum']; ?>"readonly>
+          </div>  
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['Email']; ?>" class="input" id="email">
+          </div> 
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['PhnNo']; ?>" class="input" id="phnNo">
+          </div> 
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['NID']; ?>" class="input" id="nid">
+          </div> 
+          <div class="inputfield">
+            <input type="date" value="<?php echo getUser($accNum)['DOB']; ?>" class="input" id="dob">
+          </div> 
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['Gender']; ?>" class="input" id="gender">
+          </div>  
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['Status']; ?>" class="input" id="status">
+          </div>  
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['BloodGroup']; ?>" class="input" id="bGroup">
+          </div> 
+          <div class="inputfield">
+            <input type="text" value="<?php echo getUser($accNum)['Religion']; ?>" class="input" id="religion">
+          </div> 
+          <div class="inputfield">
+              <input type="text" value="<?php echo getUser($accNum)['Address']; ?>" class="input" id="address">
+          </div>
+          <div class="inputfield">
+            <input class="btn" type="button" name="" value="Update" onclick="ajax()"/>
+          </div>
+        </div>
+      </div>
 
-			echo '<tr>';
-			echo '<th colspan = "2">INFORMATION</th>';
-			echo '</tr>';
-			echo'<tr>';
-			echo'<td > <img src ="./Files/Picture/'.$accNum.'.jpg" height = "100" width = "100"/></td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Name  </td>';
-			echo'<td>'.$userName.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Account No  </td>';
-			echo'<td>'.$accNum.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>E-mail  </td>';
-			echo'<td>'.$email.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Phone No </td>';
-			echo'<td>'.$phnNum.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>NID  </td>';
-			echo'<td>'.$nid.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>DOB  </td>';
-			echo'<td>'.$DOB.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Gender  </td>';
-			echo'<td>'.$gender.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Status  </td>';
-			echo'<td>'.$status.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Blood Group  </td>';
-			echo'<td>'.$bGroup.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Religion  </td>';
-			echo'<td>'.$religion.'</td>';
-			echo'</tr>';
-			echo'<tr>';
-			echo '<td>Address  </td>';
-			echo'<td>'.$address.'</td>';
-			echo'</tr>';
-
-?>
-		</table>
-<br>
-<a href="<?php echo $href = 'UserHome.php?accNum='.$accNum; ?>"> Go Home </a> <br>
-<a href="<?php echo $href = 'Edit.php?accNum='.$accNum; ?>"> Edit Profile</a> <br>
-<a href="<?php echo $href = "Delete.php?accNum=$accNum & userName=$userName"?>">Delete Profile </a> <br/>
-</body>
+    </div>
+    <div class="overlay hidden"></div>
+    <script src="../Asset/EditProfile.js"></script>
+  </body>
 </html>

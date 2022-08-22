@@ -19,9 +19,11 @@ function loginCheck() {
         if (this.responseText == 'success') {
           window.location.href = '../View/UserHome.php?accNum=' + accNumValue;
         } else if (this.responseText == 'failed') {
-          alert('failed');
+          const small = (document.getElementById('small').innerHTML =
+            'Invalid Account Number or password');
         } else if (this.responseText == 'null') {
-          alert('null');
+          const small = (document.getElementById('small').innerHTML =
+            'Account No or password cannot be null');
         }
       }
     };

@@ -16,12 +16,8 @@ $accNum = $_REQUEST['accNum'];
       <div class="logout"><a href="../Controller/Logout.php">logout</a></div>
     </div>
     <div class="inputfield">
-      <button
-        class="btn"
-        onclick="window.location.href = '../View/Withdraw.html?';"
-      >
-        Profile
-      </button>
+
+      <button class="btn" onclick="window.location.href='../View/Profile.php?accNum=<?php echo $accNum?>';">Profile</button>
       <button class="btn" onclick="window.location.href='../View/Balance.php?accNum=<?php echo $accNum?>';">Balance</button>
       <button class="btn" onclick="window.location.href='../View/Deposit.php?accNum=<?php echo $accNum?>';">Deposit</button>
       <button class="btn" onclick="window.location.href='../View/Withdraw.php?accNum=<?php echo $accNum?>';">Withdraw</button>
@@ -29,5 +25,4 @@ $accNum = $_REQUEST['accNum'];
       <button class="btn" onclick="window.location.href='../View/TransactionHistory.php?accNum=<?php echo $accNum?>';">Transaction History</button>
     </div>
   </body>
- <script src="../Asset/BalanceCheck.js"></script>
 </html>

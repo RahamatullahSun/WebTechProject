@@ -104,14 +104,14 @@
               <label>Address</label>
               <textarea class="textarea" id="address" value = "" onkeyup="checkAddress()" required></textarea>
               <small>Error Message</small>
-          </div> 
+          </div>
           <div class="inputfield">
             <input class="btn" type="button" name="" value="Register" onclick="ajax()"/>
+            <input class="btn" type="button" name="" value="Go-Back" onclick="location.href='../view/Login.html'"/>
           </div>
         </div>
       </div>
 
-    <!-- </form> -->
   </body>
   <script src = "../Asset/RegValidation.js"></script>
 </html>

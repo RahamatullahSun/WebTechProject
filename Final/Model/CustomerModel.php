@@ -24,18 +24,15 @@ function insert($user){
 
 }
 
-function getAllUser(){
+function getUser($accNum){
 
     $conn = getconnection();
-    $sql = "select * from Customer";
+    $sql = "select * from Customer where AccNum like $accNum;";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
     if($count > 0){
-        while($data = mysqli_fetch_assoc($result)){
-            print_r($data);
-            echo "<br>";
-            }
+       return mysqli_fetch_assoc($result);
     }else{
         echo 'No Data Found!!!';
     }
@@ -68,4 +65,19 @@ function getHistory(){
     $sql = "SELECT text FROM History";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function deleteUser($accNum){
+    $conn = getconnection();
+    $sql = "DELETE FROM `customer` WHERE accNum = $accNum;";
+    $sql1 = "DELETE FROM `history` WHERE accNum = $accNum;";
+    mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql1);
+    header('location: ../View/Login.html');
+}
+
+function updateUser($accNum,$user){
+    $conn = getconnection();
+    $sql = "UPDATE `customer` SET `Name` = '{$user['name']}', `Password` = '{$user['password']}', `AccNum` = '{$user['accNum']}', `Email` = '{$user['email']}', `PhnNo` = '{$user['phnNo']}', `NID` = '{$user['nid']}', `DOB` = '{$user['DOB']}', `Gender` = '{$user['gender']}', `Status` = '{$user['status']}', `BloodGroup` = '{$user['bGroup']}', `Religion` = '{$user['religion']}', `Address` = '{$user['address']}' WHERE `customer`.`AccNum` = $accNum;";
+    mysqli_query($conn, $sql);
 }
